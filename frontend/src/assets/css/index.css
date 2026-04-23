@@ -1,0 +1,133 @@
+/* Layout principal do Login em estilo de painel (como na imagem "Novo Produto") */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1f5286 0%, #6fa8dc 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #122f50;
+}
+
+/* Caixa central de login, similar a um quadro de entrada ERP */
+.login-main {
+    width: min(560px, 95vw);
+    background: #f7fbff;
+    border: 1px solid #c6d7ed;
+    border-radius: 12px;
+    box-shadow: 0 18px 42px rgba(8, 30, 64, 0.28);
+    padding: 24px;
+    position: relative;
+}
+
+/* Cabeçalho do painel com estilo igual a lista */
+.login-main h1 {
+    margin: 0 0 12px;
+    color: #11447f;
+    font-size: 1.8rem;
+}
+
+.login-main p#welcome-text {
+    margin: 4px 0 1rem;
+    color: #2f4f72;
+}
+
+/* Campos do formulário (padrão uniforme para nome/senha/role) */
+.login-main input,
+.login-main select,
+.login-main textarea {
+    width: 100%;
+    height: 44px; /* altura fixa para tornar retângulos do mesmo tamanho */
+    padding: 10px 12px;
+    margin: 5px 0 14px;
+    font-size: 0.96rem;
+    border: 1px solid #9eb7d7;
+    border-radius: 6px;
+    background: #ffffff;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 3px rgba(16, 70, 123, 0.08);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Ajuste especial para textarea (min-height e altura automática) */
+.login-main textarea {
+    height: 110px; /* altura maior para observações (não igual aos campos simples) */
+    overflow-y: auto;
+}
+
+
+.login-main input:focus,
+.login-main select:focus,
+.login-main textarea:focus {
+    outline: none;
+    border-color: #1373c6;
+    box-shadow: 0 0 0 3px rgba(19, 115, 198, 0.18);
+}
+
+/* Bloco de botões: posição inferior com estilo horizontal (semelhante à imagem) */
+.login-main .button-row {
+    display: flex;
+    justify-content: space-between; /* botões na mesma fileira */
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.login-main .button-row button {
+    min-width: 110px;
+    text-align: center;
+}
+
+/* Botão principal Entrar */
+.login-main .btn-primary {
+    flex: 2;
+    background: #0f4e8d; /* cor de ação principal */
+    color: #fff;
+    border: 1px solid #074a85;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Botão secundário Excluir usuário */
+.login-main .btn-secondary {
+    flex: 1;
+    background: #fff;
+    color: #0f4e8d;
+    border: 1px solid #9eb7d7;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Botão de link de navegação */
+.login-main .link-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+
+.login-main .link-row a {
+    color: #0f4e8d;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.89rem;
+}
+
+.login-main .link-row a:hover {
+    text-decoration: underline;
+}
+
+/* Botão de sair do painel (opcional, se tiver em próximas telas) */
+.logout-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: #d32f2f;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    color: #a71f1f;
+}

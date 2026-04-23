@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Encarregado - Plataforma de Almoxarifado</title>
+    <link rel="stylesheet" href="..\assets\css\style.css">
+    <script src="..\assets\js\main.js"></script>
+</head>
+<body>
+    <main class="dashboard-main">
+        <div class="dashboard-header">
+            <div class="header-left">Sistema de Gerenciamento de Estoque</div>
+            <div class="header-right">
+                <span>SGE</span>
+                <button onclick="handleLogout(event)" class="logout-btn">Saída</button>
+            </div>
+        </div>
+        <div class="nav-bar">
+            <button onclick="showSection('gerenciar')">Gerenciar Estoque</button>
+            <button onclick="showSection('pesquisa')">Relatórios</button>
+        </div>
+        <div class="dashboard-content">
+            <p id="welcome-message">Bem-vindo ao SGE! Selecione uma opção acima.</p>
+
+            <div id="gerenciar-section" class="dashboard-section" style="display:none;">
+                <h2>Gerenciar Estoque</h2>
+                <div class="estoque-layout">
+                    <div class="lado-esquerdo">
+                        <form id="add-item-form" class="item-form-grid">
+                        <div class="form-row">
+                            <label for="item-codigo">Código:</label>
+                            <input type="text" id="item-codigo" required>
+
+                            <label for="item-name">Descrição do Produto:</label>
+                            <input type="text" id="item-name" required>
+
+                            <label for="item-unidade">Unidade:</label>
+                            <input type="text" id="item-unidade" placeholder="Ex: und, kg, lata">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="item-grupo">Grupo de Produtos:</label>
+                            <input type="text" id="item-grupo" placeholder="Ex: Ferramentas">
+
+                            <label for="item-categoria">Categoria:</label>
+                            <input type="text" id="item-categoria" placeholder="Ex: Peças, Acessórios, etc.">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="item-preco">Custo Médio (R$):</label>
+                            <input type="number" id="item-preco" step="0.01" min="0" required>
+
+                            <label for="item-referencia">Referência:</label>
+                            <input type="text" id="item-referencia" placeholder="Ex: 124-A">
+
+                            <label for="item-codigo-barras">Código de Barras:</label>
+                            <input type="text" id="item-codigo-barras">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="item-fornecedor">Fornecedor:</label>
+                            <input type="text" id="item-fornecedor">
+
+                            <label for="item-marca">Marca:</label>
+                            <input type="text" id="item-marca">
+
+                            <label for="item-localizacao">Setor/Prateleira:</label>
+                            <input type="text" id="item-localizacao" placeholder="Ex: Matriz, Oficina">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="item-quantidade">Quantidade:</label>
+                            <input type="number" id="item-quantity" min="0" required>
+
+                            <label for="item-consumivel">Consumível?</label>
+                            <select id="item-consumivel">
+                                <option value="nao">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+
+                            <label for="item-aplicacao">Aplicação Obrigatória?</label>
+                            <select id="item-aplicacao">
+                                <option value="nao">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="item-validade">Possui Lote e Validade?</label>
+                            <select id="item-validade">
+                                <option value="nao">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+
+                            <label for="item-status">Ativo/Inativo:</label>
+                            <select id="item-status" required>
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+
+                            <label for="item-document">Documento:</label>
+                            <input type="text" id="item-document" placeholder="Nº do documento (opcional)">
+                        </div>
+
+                        <div class="form-row full">
+                            <label for="item-description">Observações:</label>
+                            <textarea id="item-description"></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-success">Salvar</button>
+                            <button type="button" class="btn-danger" onclick="document.getElementById('add-item-form').reset();">Fechar</button>
+                        </div>
+                    </form>
+                    </div>
+
+                    <div class="lado-direito">
+                        <h3>Itens em Estoque</h3>
+                    <table id="stock-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Grupo</th>
+                                <th>Subgrupo</th>
+                                <th>Qtd</th>
+                                <th>Preço</th>
+                                <th>Localização</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <h3>Estoques</h3>
+                    <div class="estoque-grid">
+                        <div>
+                            <label>Estoque Filial</label>
+                            <input type="text" value="" placeholder="0" class="estoque-valued" disabled>
+                            <label>Mínimo</label>
+                            <input type="number" value="0" class="estoque-min">
+                            <label>Máximo</label>
+                            <input type="number" value="0" class="estoque-max">
+                            <label>Custo Médio</label>
+                            <input type="text" value="R$ 0,00" disabled>
+                        </div>
+                        <div>
+                            <label>Estoque Matriz</label>
+                            <input type="text" value="" placeholder="0" class="estoque-valued" disabled>
+                            <label>Mínimo</label>
+                            <input type="number" value="0" class="estoque-min">
+                            <label>Máximo</label>
+                            <input type="number" value="0" class="estoque-max">
+                            <label>Custo Médio</label>
+                            <input type="text" value="R$ 0,00" disabled>
+                        </div>
+                        <div>
+                            <label>Estoque Oficina</label>
+                            <input type="text" value="" placeholder="0" class="estoque-valued" disabled>
+                            <label>Mínimo</label>
+                            <input type="number" value="0" class="estoque-min">
+                            <label>Máximo</label>
+                            <input type="number" value="0" class="estoque-max">
+                            <label>Custo Médio</label>
+                            <input type="text" value="R$ 0,00" disabled>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pesquisa-section" class="dashboard-section" style="display:none;">
+                <h2>Relatórios e Consultas</h2>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3>Pesquisa de Itens</h3>
+                        <input type="text" id="search-input" placeholder="Digite o nome do item">
+                        <button onclick="searchItems()">Pesquisar</button>
+                        <ul id="search-results"></ul>
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3>Consulta de Estoque</h3>
+                        <input type="text" id="consulta-search" placeholder="Pesquisar item...">
+                        <div id="consulta-results"></div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h3>Verificação do Cadastro</h3>
+                    <label for="verify-item">Nome do Item:</label>
+                    <input type="text" id="verify-item" placeholder="Digite o nome do item">
+                    <label for="verify-codigo">Código do Item:</label>
+                    <input type="text" id="verify-codigo" placeholder="Digite o código do item">
+                    <label for="verify-setor">Setor de Prateleira:</label>
+                    <input type="text" id="verify-setor" placeholder="Digite o setor">
+                    <button onclick="verifyItem()">Verificar</button>
+                    <div id="verify-details"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>

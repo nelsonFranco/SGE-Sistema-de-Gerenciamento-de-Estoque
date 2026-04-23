@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Almoxarifado</title>
+    <link rel="stylesheet" href="src/assets/css/style.css">
+    <link rel="stylesheet" href="src/assets/css/index.css">
+</head>
+<body>
+    <main class="login-main">
+        <h1>Plataforma de Almoxarifado</h1>
+        <p id="welcome-text">Bem-vindo à nossa plataforma de gerenciamento de almoxarifado!</p>
+        <p>Faça seu login para acessar o sistema.</p>
+        <form onsubmit="handleLogin(event)">
+            <label for="role">Tipo de Usuário:</label>
+            <select id="role" name="role" required>
+                <option value="Encarregado">Encarregado</option>
+                <option value="Almoxarife">Almoxarife</option>
+            </select>
+            <br>
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" required autocomplete="off">
+            <br>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+
+            <div class="button-row">
+                <button type="submit" class="btn-primary">Entrar</button>
+                <button type="button" class="btn-secondary" onclick="clearSavedUsers()">Excluir usuário</button>
+            </div>
+        </form>
+
+        <div class="link-row">
+            <a href="src/pages/forgot-password.html">Esqueceu sua senha?</a>
+            <a href="src/pages/register.html">Criar usuário</a>
+        </div>
+
+    </main>
+    <script src="js/login.js" defer></script>
+</body>
+</html>
