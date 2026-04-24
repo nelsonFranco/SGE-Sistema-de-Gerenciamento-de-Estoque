@@ -86,18 +86,7 @@ body {
     color: #fff;
     border: 1px solid #074a85;
     border-radius: 6px;
-    padding: 10px;
-    cursor: pointer;
-}
-
-/* Botão secundário Excluir usuário */
-.login-main .btn-secondary {
-    flex: 1;
-    background: #fff;
-    color: #0f4e8d;
-    border: 1px solid #9eb7d7;
-    border-radius: 6px;
-    padding: 10px;
+    padding: 12px;
     cursor: pointer;
 }
 
