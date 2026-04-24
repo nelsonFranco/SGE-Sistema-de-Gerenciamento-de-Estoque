@@ -1,132 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Almoxarife - Plataforma de Almoxarifado</title>
-    <link rel="stylesheet" href="..\assets\css\style.css">
-</head>
-<body>
-    <main class="dashboard-main">
-        <div class="dashboard-header">
-            <div class="header-left">Sistema de Gerenciamento de Estoque</div>
-            <div class="header-right">
-                <span>SGE</span>
-                <button onclick="handleLogout(event)" class="logout-btn">Saída</button>
-            </div>
-        </div>
-        <div class="nav-bar">
-            <button onclick="showSection('pesquisa')">Pesquisa</button>
-            <button onclick="showSection('cadastramento')">Entrada</button>
-            <button onclick="showSection('saida')">Saída</button>
-            <button onclick="showSection('consulta')">Consulta</button>
-            <button onclick="showSection('pesquisa-mov')">Pesquisa de Movimentação</button>
-            <button onclick="showSection('verifica-cadastro')">Verificação do Cadastro</button>
-        </div>
-        <div class="dashboard-content">
-            <p id="welcome-message">Bem-vindo ao SGE! Selecione uma opção acima.</p>
 
-            <div id="pesquisa-section" class="dashboard-section" style="display:none;">
-                <h2>Pesquisa de Itens</h2>
-                <input type="text" id="search-input" placeholder="Digite o nome do item">
-                <button onclick="searchItems()">Pesquisar</button>
-                <ul id="search-results"></ul>
-            </div>
-
-            <div id="cadastramento-section" class="dashboard-section" style="display:none;">
-                <h2>Cadastro de Item</h2>
-                <form id="cadastro-form">
-                    <label for="item-nome">Nome:</label>
-                    <input type="text" id="item-nome" required>
-
-                    <label for="item-codigo">Código:</label>
-                    <input type="text" id="item-codigo" required>
-
-                    <label for="item-categoria">Categoria:</label>
-                    <input type="text" id="item-categoria" placeholder="Ex: Peças, Acessórios, etc.">
-
-                    <label for="item-quantidade">Quantidade:</label>
-                    <input type="number" id="item-quantidade" min="0" required>
-
-                    <label for="item-preco">Preço de custo: R$</label>
-                    <input type="number" id="item-preco" step="0.01" min="0" required>
-
-                    <label for="item-fornecedor">Fornecedor:</label>
-                    <input type="text" id="item-fornecedor">
-
-                    <label for="item-marca">Marca:</label>
-                    <input type="text" id="item-marca">
-
-                    <label for="item-validade">Data de Validade:</label>
-                    <input type="date" id="item-validade">
-
-                    <label for="item-localizacao">Localização no estoque (ex: prateleira A3):</label>
-                    <input type="text" id="item-localizacao">
-
-                    <label for="item-codigo-barras">Código de barras:</label>
-                    <input type="text" id="item-codigo-barras">
-
-                    <label for="item-imagem">Imagem do item (URL):</label>
-                    <input type="url" id="item-imagem">
-
-                    <label for="item-status">Status:</label>
-                    <select id="item-status" required>
-                        <option value="ativo">Ativo</option>
-                        <option value="inativo">Inativo</option>
-                    </select>
-
-                    <label for="item-descricao">Descrição:</label>
-                    <textarea id="item-descricao"></textarea>
-
-                    <button type="submit">Cadastrar Item</button>
-                </form>
-            </div>
-
-            <div id="saida-section" class="dashboard-section" style="display:none;">
-                <h2>Saída</h2>
-                <form id="saida-form">
-                    <label for="saida-nome">Nome do Item:</label>
-                    <input type="text" id="saida-nome" placeholder="Digite o nome do item" required>
-                    <label for="saida-codigo">Código do Item:</label>
-                    <input type="text" id="saida-codigo" placeholder="Digite o código do item" required>
-                    <label for="saida-quantity">Quantidade:</label>
-                    <input type="number" id="saida-quantity" min="1" required>
-                    <button type="submit">Registrar Saída</button>
-                </form>
-            </div>
-
-            <div id="consulta-section" class="dashboard-section" style="display:none;">
-                <h2>Consulta de Estoque</h2>
-                <input type="text" id="consulta-search" placeholder="Pesquisar item...">
-                <div id="consulta-results"></div>
-            </div>
-
-            <div id="pesquisa-mov-section" class="dashboard-section" style="display:none;">
-                <h2>Pesquisa de Movimentações</h2>
-                <label for="mov-item">Nome do Item:</label>
-                <input type="text" id="mov-item" placeholder="Digite o nome do item">
-                <label for="mov-codigo">Código do Item:</label>
-                <input type="text" id="mov-codigo" placeholder="Digite o código do item">
-                <label for="mov-setor">Setor de Prateleira:</label>
-                <input type="text" id="mov-setor" placeholder="Digite o setor">
-                <button onclick="searchMovements()">Pesquisar</button>
-                <div id="mov-results"></div>
-            </div>
-
-            <div id="verifica-cadastro-section" class="dashboard-section" style="display:none;">
-                <h2>Verificação do Cadastro</h2>
-                <label for="verify-item">Nome do Item:</label>
-                <input type="text" id="verify-item" placeholder="Digite o nome do item">
-                <label for="verify-codigo">Código do Item:</label>
-                <input type="text" id="verify-codigo" placeholder="Digite o código do item">
-                <label for="verify-setor">Setor de Prateleira:</label>
-                <input type="text" id="verify-setor" placeholder="Digite o setor">
-                <button onclick="verifyItem()">Verificar</button>
-                <div id="verify-details"></div>
-            </div>
-        </div>
-    </main>
-    <script>
         const STOCK_KEY = 'almoxarifadoEstoque';
         const MOVEMENTS_KEY = 'almoxarifadoMovimentacoes';
 
@@ -366,7 +238,7 @@
             event.preventDefault();
             localStorage.removeItem('almoxarifadoCurrentUser');
             localStorage.removeItem('almoxarifadoCurrentRole');
-            window.location.href = 'index.html';
+            window.location.href = 'login.html';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -417,6 +289,3 @@
                 }
             });
         });
-    </script>
-</body>
-</html>

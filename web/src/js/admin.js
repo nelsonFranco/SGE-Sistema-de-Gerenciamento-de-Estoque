@@ -238,7 +238,7 @@
             event.preventDefault();
             localStorage.removeItem('almoxarifadoCurrentUser');
             localStorage.removeItem('almoxarifadoCurrentRole');
-            window.location.href = 'index.html';
+            window.location.href = '../login.html';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
