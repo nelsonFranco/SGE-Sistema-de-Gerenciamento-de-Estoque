@@ -2,3 +2,5 @@
 *postman.collection.json
 *postman.environment.json
 *postman.globals.json
+.env
+.application.properties
