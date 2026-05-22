@@ -4,3 +4,4 @@
 *postman.globals.json
 .env
 .application.properties
+lib/api/sge/src/main/resources/application.properties
