@@ -1,3 +1,5 @@
 {
-    "livePreview.defaultPreviewPath": "/web/src/pages/chefe.html"
+    "livePreview.defaultPreviewPath": "/web/src/pages/chefe.html",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
 }
