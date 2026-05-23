@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versão de Teste - SGE</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <script src="../js/teste.js" defer></script>
+</head>
+<body>
+    <main class="dashboard-main">
+        <div class="dashboard-header">
+            <div class="header-left">Sistema de Gerenciamento de Estoque</div>
+            <div class="header-right">
+                <span>SGE</span>
+                <button onclick="handleLogout(event)" class="logout-btn">Saída</button>
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <button type="button" onclick="showPanel('ver')">Ver produtos</button>
+            <button type="button" onclick="showPanel('adicionar')">Adicionar produtos</button>
+            <button type="button" onclick="showPanel('atualizar')">Atualizar produtos</button>
+            <button type="button" onclick="showPanel('deletar')">Deletar produtos</button>
+        </div>
+
+        <div class="dashboard-content">
+            <p id="welcome-message">Versão de teste do SGE. Clique em um botão para ver a função de cada produto.</p>
+
+            <div id="action-panel" class="dashboard-section">
+                <h2>Funções</h2>
+                <div id="action-description">
+                    <p>Use os botões acima para ver como cada ação de produto funciona.</p>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Janela de Produtos</h2>
+                <div id="product-window" class="lado-direito" style="min-height: 200px;">
+                    <p>As ações de produto aparecerão aqui, junto com exemplos de chamada `fetch`.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
